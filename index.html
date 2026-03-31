@@ -89,7 +89,7 @@
         </div>
 
         <div id="error-state" style="display: none;">
-            <p class="error">Authorization failed. Please try the link again.</p>
+            <p class="error" id="error-msg">Authorization failed. Please try the link again.</p>
         </div>
     </div>
 
@@ -101,6 +101,11 @@
             document.getElementById("success").style.display = "block";
             document.getElementById("code").textContent = code;
         } else {
+            const error = params.get("error");
+            const errorEl = document.getElementById("error-msg");
+            if (error) {
+                errorEl.textContent = "Error from provider: " + error + ". Send a screenshot of this to Pranav.";
+            }
             document.getElementById("error-state").style.display = "block";
         }
 
