@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attuned — Authorization</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            padding: 20px;
+        }
+        .card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        .subtitle {
+            color: #888;
+            margin-bottom: 32px;
+            font-size: 14px;
+        }
+        .instruction {
+            font-size: 16px;
+            margin-bottom: 16px;
+            color: #ccc;
+        }
+        .code-box {
+            background: #111;
+            border: 1px solid #444;
+            border-radius: 8px;
+            padding: 16px;
+            font-family: monospace;
+            font-size: 13px;
+            word-break: break-all;
+            margin-bottom: 20px;
+            color: #4ade80;
+            user-select: all;
+        }
+        .copy-btn {
+            background: #4ade80;
+            color: #000;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 32px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .copy-btn:hover { background: #22c55e; }
+        .copy-btn.copied {
+            background: #333;
+            color: #4ade80;
+        }
+        .error { color: #f87171; }
+        .done-msg {
+            margin-top: 16px;
+            color: #888;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Attuned</h1>
+        <p class="subtitle">Authorization</p>
+
+        <div id="success" style="display: none;">
+            <p class="instruction">Send this code to Pranav:</p>
+            <div class="code-box" id="code"></div>
+            <button class="copy-btn" id="copyBtn" onclick="copyCode()">Copy Code</button>
+            <p class="done-msg">You can close this tab after sending the code.</p>
+        </div>
+
+        <div id="error-state" style="display: none;">
+            <p class="error">Authorization failed. Please try the link again.</p>
+        </div>
+    </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get("code");
+
+        if (code) {
+            document.getElementById("success").style.display = "block";
+            document.getElementById("code").textContent = code;
+        } else {
+            document.getElementById("error-state").style.display = "block";
+        }
+
+        function copyCode() {
+            const code = document.getElementById("code").textContent;
+            navigator.clipboard.writeText(code).then(() => {
+                const btn = document.getElementById("copyBtn");
+                btn.textContent = "Copied!";
+                btn.classList.add("copied");
+                setTimeout(() => {
+                    btn.textContent = "Copy Code";
+                    btn.classList.remove("copied");
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
