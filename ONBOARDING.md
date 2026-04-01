@@ -1,6 +1,8 @@
-# Getting Set Up for Attuned
+# Onboarding to Attuned
 
-Attuned creates personalized Spotify playlists based on your WHOOP recovery data. To get started, you need to do **two quick things** — both are one-time only.
+Attuned creates personalized Spotify playlists based on your WHOOP recovery data — every playlist is built from your own music library, matched to what your body needs today.
+
+Getting onboarded takes **3 minutes**. Two quick steps, both one-time only.
 
 ---
 
